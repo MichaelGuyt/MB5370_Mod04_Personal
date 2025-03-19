@@ -1,0 +1,48 @@
+---
+title: "MB5370 Module 04. Workshop 2 - Using ggplot2 for communication"
+author: "Michael Guijt"
+date: "2025-03-19"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 3.1 Labels
+
+Adding labels;
+
+```{r}
+ggplot(mpg, aes(displ, hwy)) + 
+  geom_point(aes(color = class)) +
+  geom_smooth(se = FALSE) +
+  labs(title = "Fuel efficiency generally decreases with engine size")
+```
+
+Adding subtitle and caption.
+
+```{r}
+ggplot(mpg, aes(displ, hwy)) + 
+  geom_point(aes(color = class)) +
+  geom_smooth(se = FALSE) +
+  labs(title = "Fuel efficiency generally decreases with engine size", 
+       subtitle = "Two seaters (sports cars) are an exception because of their light weight",
+       caption = "Data from fueleconomy.gov")
+```
+
+Using the labs() function to replace axis labels and legend titles.
+
+```{r}
+ggplot(mpg, aes(displ, hwy)) + 
+  geom_point(aes(color = class)) +
+  geom_smooth(se = FALSE) +
+  labs(
+    x = "Engine displacement (L)",
+    y = "Highway fuel economy (mpg)",
+    colour = "Car type"
+  )
+```
+
+## 3.2 Annotations
+
