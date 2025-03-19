@@ -98,3 +98,76 @@ ggplot(mpg, aes(displ, hwy)) +
 
 ## 3.5 Legends and colour schemes
 
+Using theme() to change the position of the legend.
+
+```{r}
+base <- ggplot(mpg, aes(displ, hwy)) +
+  geom_point(aes(colour = class)) 
+
+#trying different legend positions
+base + theme(legend.position = "left")
+base + theme(legend.position = "top")
+base + theme(legend.position = "bottom")
+base + theme(legend.position = "right") #the default
+```
+
+## 3.6 Replacing the scale
+
+Demonstration on transforming scale; converting the carat and price data of the diamonds to log scale;
+
+```{r}
+ggplot(diamonds, aes(carat, price)) +
+  geom_bin2d() +
+  scale_x_log10() +
+  scale_y_log10()
+```
+
+Customising colour scales;
+
+```{r}
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point(aes(color = drv))
+
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point(aes(color = drv)) +
+  scale_colour_brewer(palette = "Set1")
+```
+
+Adding shapes can make your graph more interpretable for colorblind people;
+
+```{r}
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point(aes(color = drv, shape = drv)) +
+  scale_colour_brewer(palette = "Set1")
+```
+
+Setting manual colors without calling in a palette;
+
+```{r}
+presidential %>%
+  mutate(id = 33 + row_number()) %>%
+  ggplot(aes(start, id, colour = party)) +
+  geom_point() +
+  geom_segment(aes(xend = end, yend = id)) +
+  scale_colour_manual(values = c(Republican = "red", Democratic = "blue"))
+```
+
+Using the viridis colour package, very popular;
+
+```{r}
+#making a fake dataset
+df <- tibble(
+  x = rnorm(10000),
+  y = rnorm(10000)
+)
+
+ggplot(df, aes(x,y)) +
+  geom_hex() +
+  coord_fixed()
+
+ggplot(df, aes(x,y)) +
+  geom_hex() +
+  viridis::scale_fill_viridis() +
+  coord_fixed()
+```
+
