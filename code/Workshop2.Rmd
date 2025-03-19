@@ -46,3 +46,55 @@ ggplot(mpg, aes(displ, hwy)) +
 
 ## 3.2 Annotations
 
+Adding text annotations of a specified data value to the plot itself.
+
+```{r}
+best_in_class <- mpg %>%
+  group_by(class) %>%
+  filter(row_number(desc(hwy)) == 1)
+
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point(aes(colour = class)) +
+  geom_text(aes(label = model), data = best_in_class)
+```
+
+## 3.3 Scales
+
+Showing that scales are automatically added.
+
+```{r}
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point(aes(colour = class))
+```
+
+Adding custom axis limits;
+
+```{r}
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point(aes(colour = class)) +
+  scale_x_continuous(limits = c(0,12)) +
+  scale_y_continuous() +
+  scale_colour_discrete()
+```
+
+## 3.4 Axis ticks
+
+Using breaks to change the position of axis markers.
+
+```{r}
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point() +
+  scale_y_continuous(breaks = seq(15, 40, by = 5))
+```
+
+Can also set labels to NULL to remove them.
+
+```{r}
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point() +
+  scale_x_continuous(labels = NULL) +
+  scale_y_continuous(labels = NULL)
+```
+
+## 3.5 Legends and colour schemes
+
