@@ -1,0 +1,39 @@
+---
+title: "Workshop2 Graph"
+author: "Michael Guijt"
+date: "2025-03-20"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Plot Deconstruction
+
+```{r}
+data <- read.csv("GraphData.csv")
+
+data$Date <- paste(data$Date, "2024", sep = "-")
+data$Date <- dmy(data$Date)
+
+data_long <- pivot_longer(data, cols = c(Pupa, Adult), names_to = "Type", values_to = "Count")
+
+data_env <- pivot_longer(data, cols = c(Rainfall, Temperature), names_to = "Variable", values_to = "Value")
+
+data$Temperature <- na.approx(data$Temperature, x=data$Date, na.rm=FALSE)
+data$Rainfall <- na.approx(data$Rainfall, x=data$Date, na.rm=FALSE)
+
+
+ggplot() +
+  geom_bar(data = data_long, aes(x = Date, y = Count, fill = Type), stat = "identity", position = position_dodge(width = 0.8), width = 1.8, alpha = 0.7) +
+  geom_line(data = data_env, aes(x = Date, y = Value/7, color = Variable, group = Variable), size = 0.6) +
+  scale_y_continuous(name = "Count (Pupa & Adult)", limits = c(0,7), sec.axis = sec_axis(~ . * 7, name = "Rainfall & Temperature (mm)")) +
+  labs(title = "Pupa and Adult counts with rainfall & temperature",
+       x = "Date") +
+  scale_fill_manual(values = c("Pupa" = "blue", "Adult" = "red")) +
+  scale_color_manual(values = c("Rainfall" = "darkgreen", "Temperature" = "orange")) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.text = element_text(size = 10), legend.title = element_text(size = 10), legend.key.size = unit(0.5, "cm"))
+
+ggsave("My_Plot.pdf")
