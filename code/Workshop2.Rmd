@@ -171,3 +171,44 @@ ggplot(df, aes(x,y)) +
   coord_fixed()
 ```
 
+## 3.7 Themes
+
+Showcasing different themes:
+
+```{r}
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point(aes(color = class)) +
+  geom_smooth(se = FALSE) +
+  theme_bw()
+
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point(aes(color = class)) +
+  geom_smooth(se = FALSE) +
+  theme_light()
+
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point(aes(color = class)) +
+  geom_smooth(se = FALSE) +
+  theme_classic()
+
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point(aes(color = class)) +
+  geom_smooth(se = FALSE) +
+  theme_dark()
+```
+
+Example of determining your own theme;
+
+```{r, message=FALSE}
+theme (panel.border = element_blank(),
+       panel.grid.minor.x = element_blank(),
+       panel.grid.minor.y = element_blank(),
+       legend.position = "bottom",
+       legend.title = element_blank(),
+       legend.text = element_text(size=8),
+       panel.grid.major = element_blank(),
+       axis.text.y = element_text(colour="black"),
+       axis.text.x = element_text(colour="black"),
+       text = element_text(family="Arial"))
+```
+
