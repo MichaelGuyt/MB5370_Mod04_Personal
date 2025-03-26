@@ -26,13 +26,13 @@ data$Rainfall <- na.approx(data$Rainfall, x=data$Date, na.rm=FALSE)
 
 
 ggplot() +
-  geom_bar(data = data_long, aes(x = Date, y = Count, fill = Type), stat = "identity", position = position_dodge(width = 0.8), width = 1.8, alpha = 0.7) +
-  geom_line(data = data_env, aes(x = Date, y = Value/7, color = Variable, group = Variable), size = 0.6) +
-  scale_y_continuous(name = "Count (Pupa & Adult)", limits = c(0,7), sec.axis = sec_axis(~ . * 7, name = "Rainfall & Temperature (mm)")) +
+  geom_bar(data = data_long, aes(x = Date, y = Count, fill = Type), stat = "identity", position = position_dodge(width = 0.8), width = 3, alpha = 0.7) +
+  geom_smooth(data = data_env, aes(x = Date, y = Value/7, color = Variable), method = "loess", se = TRUE, span = 0.3, size = 1.2) +
+  scale_y_continuous(name = "Count (Pupa & Adult)", limits = c(0,7), sec.axis = sec_axis(~ . * 7, name = "Rainfall (mm) & Temperature (degrees Celsius)")) +
   labs(title = "Pupa and Adult counts with rainfall & temperature",
        x = "Date") +
-  scale_fill_manual(values = c("Pupa" = "blue", "Adult" = "red")) +
-  scale_color_manual(values = c("Rainfall" = "darkgreen", "Temperature" = "orange")) +
+  scale_fill_manual(values = c("Pupa" = "darkred", "Adult" = "darkblue")) +
+  scale_color_manual(values = c("Rainfall" = "darkgreen", "Temperature" = "darkorange")) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.text = element_text(size = 10), legend.title = element_text(size = 10), legend.key.size = unit(0.5, "cm"))
 
