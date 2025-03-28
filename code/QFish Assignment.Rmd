@@ -11,3 +11,24 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # QFish Plotting Assignment
 
+First step is to import the data.
+
+```{r}
+eels <- read.csv("export.csv")
+```
+
+```{r}
+eels <- eels %>%
+  mutate(
+    Tonnes = as.numeric(replace(Tonnes, Tonnes == "N/A", 0)),
+    Licences = as.numeric(replace(Licences, Licences == "N/A",0))
+  )
+```
+
+```{r}
+eels <- eels %>%
+  mutate(
+    Tonnes = ifelse(CalendarYear == 1998, (Tonnes[CalendarYear == 1997] + Tonnes[CalendarYear == 1999]) / 2, Tonnes),
+    Licences = ifelse(CalendarYear == 1998, (Licences[CalendarYear == 1997] + Licences[CalendarYear == 1999]) / 2, Licences)
+  )
+```
