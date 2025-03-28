@@ -72,11 +72,16 @@ Now we can plot the data using ggplot.
 ggplot(eels, aes(x=CalendarYear)) +
   geom_line(aes(y=Tonnes, color = "Tonnes"), size = 1.2) +
   geom_line(aes(y=Licences, color = "Licences"), size = 1.2, linetype = "dashed") +
+  geom_point(data = subset(eels, CalendarYear == 1998),
+             aes(x=CalendarYear, y=Tonnes), color = "red", size = 3, shape = 16, stroke = 1.2) +
   scale_y_continuous(name = "Catch (tonnes)", sec.axis = sec_axis(~ ., name = "Number of licences")) +
+  scale_x_continuous(name = "Year", breaks = seq(min(eels$CalendarYear), max(eels$CalendarYear), 2)) +
   labs(title = "Freshwater eel catch and number of licences over time", x = "Year") +
   scale_color_manual(values = c("Tonnes" = "darkblue", "Licences" = "darkred")) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1),
         legend.title = element_blank(),
-        legend.position = "top")
+        legend.position = c(0.85, 0.85),
+        legend.background = element_rect(color = "black", fill = NA))
 ```
+
