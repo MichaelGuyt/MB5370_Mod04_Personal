@@ -17,7 +17,10 @@ First step is to import the data.
 eels <- read.csv("export.csv")
 ```
 
+The Licences and Tonnes variables that we are interested in are listed as character vectors due to "N/A." Consequently, we change all N/As with zeroes to convert the data to a numerical vector.
+
 ```{r}
+#converting N/A to 0
 eels <- eels %>%
   mutate(
     Tonnes = as.numeric(replace(Tonnes, Tonnes == "N/A", 0)),
@@ -25,7 +28,10 @@ eels <- eels %>%
   )
 ```
 
+Next, we see that the time series is broken due to a missing value in 1998. As it is just one value, we will replace the data with the averages of the values in 1997 and 1999. 
+
 ```{r}
+#replacing 1998 value with average
 eels <- eels %>%
   mutate(
     Tonnes = ifelse(CalendarYear == 1998, (Tonnes[CalendarYear == 1997] + Tonnes[CalendarYear == 1999]) / 2, Tonnes),
