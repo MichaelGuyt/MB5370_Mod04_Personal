@@ -60,6 +60,7 @@ eels <- eels %>%
 Finally, we convert Year from a character to a numerical variable.
 
 ```{r}
+#convert year from character to numeric
 eels$CalendarYear <- as.numeric(eels$CalendarYear)
 ```
 
@@ -85,3 +86,4 @@ ggplot(eels, aes(x=CalendarYear)) +
         legend.background = element_rect(color = "black", fill = NA))
 ```
 
+The plot shows the annual catch of freshwater eel in Australian fisheries from 1996 to 2018, in tonnes. It also shows the number of fishing licences approved annually for the fishery as well. The 1998 data value is marked in red to indicate that data was missing for that year, with the value being calculated as an average of the years before and after instead.
