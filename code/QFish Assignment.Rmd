@@ -46,3 +46,24 @@ As the time series has no data from 2019 onwards, we remove those years from the
 eels <- eels %>%
   filter(CalendarYear < 2019)
 ```
+
+Finally, we convert Year from a character to a numerical variable.
+
+```{r}
+eels$CalendarYear <- as.numeric(eels$CalendarYear)
+```
+
+Now we can plot the data using ggplot.
+
+```{r}
+ggplot(eels, aes(x=CalendarYear)) +
+  geom_line(aes(y=Tonnes, color = "Tonnes"), size = 1.2) +
+  geom_line(aes(y=Licences, color = "Licences"), size = 1.2, linetype = "dashed") +
+  scale_y_continuous(name = "Catch (tonnes)", sec.axis = sec_axis(~ ., name = "Number of licences")) +
+  labs(title = "Freshwater eel catch and number of licences over time", x = "Year") +
+  scale_color_manual(values = c("Tonnes" = "darkblue", "Licences" = "darkred")) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.title = element_blank(),
+        legend.position = "top")
+```
