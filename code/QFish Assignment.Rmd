@@ -11,11 +11,21 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # QFish Plotting Assignment
 
+## Data Location
+
+The data was sourced from the QFish government website; https://qfish.fisheries.qld.gov.au/
+
+It is found in the subset "Commercial Harvest Fisheries," filtered to include the licence and catch data for the freshwater eel fishery.
+
+## Data Import
+
 First step is to import the data.
 
 ```{r}
 eels <- read.csv("export.csv")
 ```
+
+## Data Wrangling
 
 The Licences and Tonnes variables that we are interested in are listed as character vectors due to "N/A." Consequently, we change all N/As with zeroes to convert the data to a numerical vector.
 
@@ -52,6 +62,9 @@ Finally, we convert Year from a character to a numerical variable.
 ```{r}
 eels$CalendarYear <- as.numeric(eels$CalendarYear)
 ```
+
+
+## Plotting the data
 
 Now we can plot the data using ggplot.
 
