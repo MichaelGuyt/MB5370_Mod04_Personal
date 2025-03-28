@@ -38,3 +38,11 @@ eels <- eels %>%
     Licences = ifelse(CalendarYear == 1998, (Licences[CalendarYear == 1997] + Licences[CalendarYear == 1999]) / 2, Licences)
   )
 ```
+
+As the time series has no data from 2019 onwards, we remove those years from the dataset.
+
+```{r}
+#only keeps values of years before 2019
+eels <- eels %>%
+  filter(CalendarYear < 2019)
+```
