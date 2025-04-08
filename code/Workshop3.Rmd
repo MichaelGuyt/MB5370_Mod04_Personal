@@ -73,3 +73,22 @@ cms_patient_experience |>
     values_from = prf_rate
   )
 ```
+
+### 4.5.4
+
+```{r}
+df <- tribble(
+  ~id, ~measurement, ~value,
+  "A", "bp1", 100,
+  "B", "bp1", 140,
+  "B", "bp2", 115,
+  "A", "bp2", 120,
+  "A", "bp3", 105
+)
+
+df |> 
+  pivot_wider(
+    names_from = measurement,
+    values_from = value
+  )
+```
