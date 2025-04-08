@@ -27,7 +27,7 @@ eels <- read.csv("export.csv")
 
 ## Data Wrangling
 
-The Licences and Tonnes variables that we are interested in are listed as character vectors due to "N/A." Consequently, we change all N/As with zeroes to convert the data to a numerical vector.
+The Licences and Tonnes variables that we are interested in are listed as character vectors due to "N/A." Consequently, we change all N/As to zeroes to convert the data to a numerical vector.
 
 ```{r}
 #converting N/A to 0
