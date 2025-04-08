@@ -27,12 +27,49 @@ Tidying data up/
 
 ## 4.5 Pivoting data
 
+### 4.5.1
+
 ```{r}
 billboard
 
 billboard |> pivot_longer(
   cols = starts_with("wk"),
   names_to = "week",
-  values_to = "rank"
+  values_to = "rank",
+  values_drop_na = TRUE
 )
+```
+
+### 4.5.2
+
+```{r}
+df <- tribble(
+  ~id, ~bp1, ~bp2,
+  "A", 100, 120,
+  "B", 140, 115,
+  "C", 120, 125
+)
+
+df |> 
+  pivot_longer(
+    cols = bp1:bp2,
+    names_to = "measurement",
+    values_to = "value"
+  )
+```
+
+### 4.5.3
+
+```{r}
+cms_patient_experience
+
+cms_patient_experience |> 
+  distinct(measure_cd, measure_title)
+
+cms_patient_experience |> 
+  pivot_wider(
+    id_cols = starts_with("org"),
+    names_from = measure_cd,
+    values_from = prf_rate
+  )
 ```
