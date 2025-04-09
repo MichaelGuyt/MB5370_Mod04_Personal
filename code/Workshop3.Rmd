@@ -91,4 +91,49 @@ df |>
     names_from = measurement,
     values_from = value
   )
+
+df |>
+  distinct(measurement) |>
+  pull()
+
+df |>
+  select(-measurement, -value) |>
+  distinct() |>
+  mutate(x = NA, y = NA, z = NA)
 ```
+
+### 4.5.5
+
+1.
+
+```{r}
+stocks <- tibble(
+  year = c(2015, 2015, 2016, 2016),
+  half = c( 1, 2, 1, 2),
+  return = c(1.88, 0.59, 0.92, 0.17)
+)
+
+#stocks %>% 
+#  pivot_wider(names_from = year, values_from = return) %>%
+#  pivot_longer('2015':'2016', names_to = "year", value_to = "return") 
+
+```
+
+3. Need to make it longer, the variables are "pregnant," "sex," and "count." 
+
+### 4.5.6
+
+```{r}
+table3
+
+table3 %>%
+  separate(rate, into = c("cases","population"), sep = "/", convert = TRUE)
+
+table3 %>%
+  separate(year, into = c("century","year"), sep = 2)
+
+table5 %>%
+  unite(new, century, year, sep="")
+```
+
+
