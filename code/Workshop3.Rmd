@@ -206,6 +206,26 @@ students <- read.csv("https://pos.it/r4ds-students-csv", na = c("N/A",""))
 students
 ```
 
+## 4.8 Learning relational data
 
+### 4.8.1
+
+```{r}
+library(nycflights13)
+
+planes %>%
+  count(tailnum) %>%
+  filter(n > 1)
+
+weather %>%
+  count(year, month, day, hour, origin) %>%
+  filter(n > 1)
+
+flights %>%
+  count(year, month, day, flight) %>%
+  filter(n > 1)
+```
+
+### 4.8.2
 
 
