@@ -276,8 +276,34 @@ flights2 %>%
   left_join(airports, c("dest" = "faa"))
 ```
 
+## 4.9 Pipes
 
+```{r, eval = FALSE}
 
+#1 
+foo_foo_1 <- hop(foo_foo, through = forest)
+foo_foo_2 <- scoop(foo_foo_1, up = field_mice)
+foo_foo_3 <- bop(foo_foo_2, on = head)
 
+#2
+foo_foo <- hop(foo_foo, through = forst)
+foo_foo <- scoop(foo_foo, up = field_mice)
+foo_foo <- bop(foo_foo, on = head)
+
+#3
+bop(
+  scoop(
+    hop(foo_foo, through = forest),
+    up = field_mice
+  ),
+  on = head
+)
+
+#4
+foo_foo %>%
+  hop(through = forest) %>%
+  scoop(up = field_mice) %>%
+  bop(on = head)
+```
 
 
