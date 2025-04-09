@@ -198,9 +198,13 @@ students <- read_csv("https://pos.it/r4ds-students-csv")
 students
 ```
 
+### 4.7.2
 
+```{r}
+students <- read.csv("https://pos.it/r4ds-students-csv", na = c("N/A",""))
 
-
+students
+```
 
 
 
